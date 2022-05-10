@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct Reddit_CommentsApp: App {
+    @State var modelData = ModelData()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(modelData)
         }
     }
 }

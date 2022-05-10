@@ -11,6 +11,11 @@
 		47333180281BF694008A4411 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4733317F281BF694008A4411 /* ContentView.swift */; };
 		47333182281BF696008A4411 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47333181281BF696008A4411 /* Assets.xcassets */; };
 		47333185281BF696008A4411 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47333184281BF696008A4411 /* Preview Assets.xcassets */; };
+		4733318C281BF6BB008A4411 /* CommentDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4733318B281BF6BB008A4411 /* CommentDetails.swift */; };
+		4733318F281BF6DE008A4411 /* CommentsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4733318E281BF6DE008A4411 /* CommentsTable.swift */; };
+		47333191281BF707008A4411 /* CommentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47333190281BF707008A4411 /* CommentData.swift */; };
+		47333193281BF779008A4411 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47333192281BF779008A4411 /* CommentCell.swift */; };
+		47333195281BF78F008A4411 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47333194281BF78F008A4411 /* ModelData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +24,11 @@
 		4733317F281BF694008A4411 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		47333181281BF696008A4411 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		47333184281BF696008A4411 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		4733318B281BF6BB008A4411 /* CommentDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentDetails.swift; sourceTree = "<group>"; };
+		4733318E281BF6DE008A4411 /* CommentsTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsTable.swift; sourceTree = "<group>"; };
+		47333190281BF707008A4411 /* CommentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentData.swift; sourceTree = "<group>"; };
+		47333192281BF779008A4411 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		47333194281BF78F008A4411 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +61,8 @@
 		4733317C281BF694008A4411 /* Reddit_Comments */ = {
 			isa = PBXGroup;
 			children = (
+				47333196281BF7B2008A4411 /* Model */,
+				4733318D281BF6C6008A4411 /* Comment */,
 				4733317D281BF694008A4411 /* Reddit_CommentsApp.swift */,
 				4733317F281BF694008A4411 /* ContentView.swift */,
 				47333181281BF696008A4411 /* Assets.xcassets */,
@@ -65,6 +77,25 @@
 				47333184281BF696008A4411 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		4733318D281BF6C6008A4411 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				4733318B281BF6BB008A4411 /* CommentDetails.swift */,
+				4733318E281BF6DE008A4411 /* CommentsTable.swift */,
+				47333192281BF779008A4411 /* CommentCell.swift */,
+			);
+			path = Comment;
+			sourceTree = "<group>";
+		};
+		47333196281BF7B2008A4411 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				47333194281BF78F008A4411 /* ModelData.swift */,
+				47333190281BF707008A4411 /* CommentData.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +168,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4733318C281BF6BB008A4411 /* CommentDetails.swift in Sources */,
+				47333191281BF707008A4411 /* CommentData.swift in Sources */,
 				47333180281BF694008A4411 /* ContentView.swift in Sources */,
 				4733317E281BF694008A4411 /* Reddit_CommentsApp.swift in Sources */,
+				4733318F281BF6DE008A4411 /* CommentsTable.swift in Sources */,
+				47333193281BF779008A4411 /* CommentCell.swift in Sources */,
+				47333195281BF78F008A4411 /* ModelData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
