@@ -13,8 +13,8 @@ final class ModelData: ObservableObject {
     @Published var commentsParsed: [UIComment] = []
     let emptyData = ParsedData()
     
-    init() {
-        emptyData.load("https://www.reddit.com/r/Music/comments/u5jfbi.json?limit=25"){ [weak self] commentsData in
+    init(subreddit: String, id: String) {
+        emptyData.load("https://www.reddit.com/r/\(subreddit)/comments/\(id).json?limit=20"){ [weak self] commentsData in
             DispatchQueue.main.async {
                 self?.commentsParsed = commentsData.comments
             }
@@ -32,7 +32,7 @@ final class ModelData: ObservableObject {
 
 class ParsedData{
     var comments: [UIComment] = []
-    var childrenIDs: [String]? = nil
+    var childrenIDs: [String] = []
     
     func load(_ link: String, onCompleted: @escaping (ParsedData) -> Void) {
         let urlSession = URLSession(configuration: .default)
@@ -45,9 +45,11 @@ class ParsedData{
     }
     
     func loadChilds(onCompleted: @escaping (ParsedData) -> Void){
-        if (childrenIDs == nil) { return }
-        let combinedIDs = childrenIDs?.reduce("", {x,y in x + "," + y})
-        guard var additionalIDs = combinedIDs else {return}
+        if (childrenIDs.isEmpty)
+        { return }
+        let array = childrenIDs.prefix(20)
+        childrenIDs = Array(childrenIDs.dropFirst(20))
+        var additionalIDs = Array(array).reduce("", {x,y in x + "," + y})
         additionalIDs.remove(at: additionalIDs.startIndex)
         
         guard let parent_id = comments.last?.parent_id else {return}
@@ -62,31 +64,31 @@ class ParsedData{
     
     func addComment(_ arrayOfComments: [GeneralChilds]){
         for child in arrayOfComments{
-            if(child.comment.children == nil) {
-                var tempComment = UIComment()
-                tempComment.body = child.comment.body
-                guard let time = child.comment.created else {return}
+            var tempComment = UIComment()
+            tempComment.body = child.comment.body
+            if let time = child.comment.created{
                 tempComment.created = ParsedData.convertToNice(time - Date().timeIntervalSince1970)
-                tempComment.depth = child.comment.depth
-                tempComment.permalink = child.comment.permalink
-                tempComment.username = child.comment.username
-                tempComment.rating = child.comment.rating
-                tempComment.children = child.comment.children
-                tempComment.parent_id = child.comment.parent_id
-                self.comments.append(tempComment)
-                childrenIDs = nil
-            } else {
-                childrenIDs = child.comment.children
             }
+            tempComment.depth = child.comment.depth
+            tempComment.permalink = child.comment.permalink
+            tempComment.username = child.comment.username
+            tempComment.rating = child.comment.rating
+            tempComment.children = child.comment.children
+            if (child.kind == "more"){
+                guard let id = child.comment.children else {return}
+                childrenIDs.append(contentsOf: id)
+            }
+            tempComment.parent_id = child.comment.parent_id
+            self.comments.append(tempComment)
         }
     }
     
     static func convertToNice(_ time: TimeInterval) -> String {
-            let formatter = DateComponentsFormatter()
-                formatter.allowedUnits = [.day, .hour, .minute, .second]
-                formatter.unitsStyle = .abbreviated
-                formatter.maximumUnitCount = 1
-
-                return formatter.string(from: time) ?? String(time)
-        }
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.day, .hour, .minute, .second]
+        formatter.unitsStyle = .abbreviated
+        formatter.maximumUnitCount = 1
+        
+        return formatter.string(from: time) ?? String(time)
+    }
 }

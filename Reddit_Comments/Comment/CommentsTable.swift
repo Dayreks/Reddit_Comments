@@ -44,7 +44,7 @@ struct CommentsTable: View {
 struct CommentsTable_Previews: PreviewProvider {
     static var previews: some View {
         CommentsTable()
-            .environmentObject(ModelData())
+            .environmentObject(ModelData(subreddit: "Music", id: "u5jfbi"))
     }
 }
 

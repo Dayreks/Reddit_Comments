@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct Reddit_CommentsApp: App {
-    @State var modelData = ModelData()
+    @State var modelData = ModelData(subreddit: "Music", id: "u5jfbi")
     
     var body: some Scene {
         WindowGroup {
